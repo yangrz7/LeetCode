@@ -64,14 +64,14 @@ public class ReverseList {
      */
     public static ListNode reverseList(ListNode head) {
         if (head == null || head.next == null) return head;
-        ListNode newNode = null;
+        ListNode newHead = null;
         while (head != null) {
             ListNode node = new ListNode(head.val);
-            node.next = newNode;
-            newNode = node;
+            node.next = newHead;
+            newHead = node;
             head = head.next;
         }
-        return newNode;
+        return newHead;
     }
 
     /**
@@ -87,7 +87,7 @@ public class ReverseList {
      * 改进后的迭代法：将当前节点指向的下一个节点改为指向前一个节点即可
      * 复杂度分析：
      * 时间复杂度：O(n)
-     * 空间复杂度：O(n)
+     * 空间复杂度：O(1)
      *
      * @param head
      * @return
@@ -122,7 +122,7 @@ public class ReverseList {
     }
 
     public static void main(String[] args) {
-        int[] nums = new int[] {1, 2, 3};
+        int[] nums = new int[] {1, 2, 3, 4, 5};
         ListNode head = new ListNode(nums);
         System.out.println(head);
         System.out.println("反转后的链表" + reverseList2(head));
