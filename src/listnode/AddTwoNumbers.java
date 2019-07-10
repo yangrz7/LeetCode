@@ -116,7 +116,7 @@ public class AddTwoNumbers {
     }
 
     public static void main(String[] args) {
-         int[] arr1 = new int[] {2, 4, 2};
+         int[] arr1 = new int[] {2, 4, 2, 4};
          int[] arr2 = new int[] {5, 6, 4};
          ListNode listNode1 = new ListNode(arr1);
          ListNode listNode2 = new ListNode(arr2);
