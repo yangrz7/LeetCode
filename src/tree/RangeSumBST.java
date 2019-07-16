@@ -2,6 +2,7 @@ package tree;
 
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Stack;
 
 /**
  * 938. 二叉搜索树的范围和
@@ -49,6 +50,7 @@ public class RangeSumBST{
             }
         }
 
+
         public TreeNode add(TreeNode root, Integer val) {
             if (root == null) return new TreeNode(val);
             if (val.compareTo(root.val) < 0) root.left = add(root.left, val);
@@ -57,32 +59,119 @@ public class RangeSumBST{
         }
 
          @Override
-         public String toString() {
-            TreeNode root = this;
-            Queue<TreeNode> queue = new LinkedList<>();
-            queue.add(root);
-            StringBuilder res = new StringBuilder();
-            while (!queue.isEmpty()) {
-                TreeNode node = queue.remove();
-                res.append(node + ", ");
-                if (node.left != null) queue.add(node.left);
-                if (node.right != null) queue.add(node.right);
-            }
-            return res.toString();
-         }
-
-         @Override
         public int compareTo(TreeNode o) {
             return this.val.compareTo(o.val);
         }
 
     }
 
+    /**
+     * 递归
+     * @param root
+     * @param L
+     * @param R
+     * @return
+     */
+    public static int rangeSumBST(TreeNode root, int L, int R) {
+        if (root == null) return 0;
+        if (root.val < L) return rangeSumBST(root.right, L, R);
+        if (root.val > R) return rangeSumBST(root.left, L, R);
+        return root.val + rangeSumBST(root.left, L, R) + rangeSumBST(root.right, L, R);
+    }
+
+    /**
+     * 中序遍历
+     * @param root
+     * @param L
+     * @param R
+     * @return
+     */
+    static int num = 0;
+    public static int rangeSumBST2(TreeNode root, int L, int R) {
+        if (root == null) return 0;
+        inOrder(root, L, R);
+        return num;
+    }
+
+    public static void inOrder(TreeNode root, int L, int R) {
+        if (root == null) return;
+        inOrder(root.left, L, R);
+        if (root.val >= L && root.val <= R) {
+            num += root.val;
+        }
+        inOrder(root.right, L, R);
+    }
+
+    /**
+     * 前序遍历
+     * @param root
+     * @param L
+     * @param R
+     * @return
+     */
+    public static int rangeSumBST3(TreeNode root, int L, int R) {
+        if (root == null) return 0;
+        preOrder(root, L, R);
+        return num;
+    }
+
+    private static void preOrder(TreeNode root, int L, int R) {
+        if (root == null) return;
+        if (root.val >= L && root.val <= R) {
+            num += root.val;
+        }
+        preOrder(root.left, L, R);
+        preOrder(root.right, L, R);
+    }
+
+    /**
+     * 前序遍历的非递归实现
+     * @param root
+     * @param L
+     * @param R
+     * @return
+     */
+    public static int rangeSumBST4(TreeNode root, int L, int R) {
+        int sum = 0;
+        Stack<TreeNode> stack = new Stack<>();
+        stack.push(root);
+        while (!stack.isEmpty()) {
+            TreeNode cur = stack.pop();
+            if (cur.val >= L && cur.val <= R) {
+                sum += cur.val;
+            }
+            if (cur.right != null) stack.push(cur.right);
+            if (cur.left != null) stack.push(cur.left);
+        }
+        return sum;
+    }
+
+    /**
+     * 后序遍历
+     * @param root
+     * @param L
+     * @param R
+     * @return
+     */
+    public static int rangeSumBST5(TreeNode root, int L, int R) {
+        if (root == null) return 0;
+        postOrder(root, L, R);
+        return num;
+    }
+
+    private static void postOrder(TreeNode root, int L, int R) {
+        if (root == null) return;
+        postOrder(root.left, L, R);
+        postOrder(root.right, L, R);
+        if (root.val >= L && root.val <= R) {
+            num += root.val;
+        }
+     }
 
     public static void main(String[] args) {
          int[] arr = new int[] {10, 5, 15, 3, 7, 0, 18};
          TreeNode treeNode = new TreeNode(arr);
-         System.out.println(treeNode);
+         System.out.println(rangeSumBST4(treeNode, 7, 15));
     }
 
 }
