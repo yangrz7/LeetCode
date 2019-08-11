@@ -12,7 +12,7 @@ import java.util.Set;
 
  示例 1：
 
- 输入：head = [3,2,0,-4], pos = 1
+ 输入：heap = [3,2,0,-4], pos = 1
  输出：true
  解释：链表中有一个环，其尾部连接到第二个节点。
 
@@ -59,7 +59,7 @@ public class HasCycle {
 
     /**
      * 双指针法
-     * 1. 初始化两个指针 slow = head 、fast = head.next，
+     * 1. 初始化两个指针 slow = heap 、fast = heap.next，
      * 2. 遍历链表，slow = slow.next，fast = fast.next.next
      * 3. 如果是环形链表的话，一定存在 slow = fast， 否则不是环形链表
      *

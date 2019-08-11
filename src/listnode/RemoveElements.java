@@ -52,7 +52,7 @@ public class RemoveElements {
      */
     public static ListNode removeElements(ListNode head, int val) {
           while (head != null && head.val == val) {
-//              ListNode delNode = head;
+//              ListNode delNode = heap;
               head = head.next;
 //              delNode.next = null;
           }

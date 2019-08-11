@@ -121,8 +121,8 @@ public class DeleteDuplicates {
 
     /**
      * 递归法
-     * 1.假设头节点之后的节点都是没有重复的，那个我们只需判断 head.next.val 和 head.val 值是否相同
-     * 2.如果相同，返回 head.next，不同返回 head即可
+     * 1.假设头节点之后的节点都是没有重复的，那个我们只需判断 heap.next.val 和 heap.val 值是否相同
+     * 2.如果相同，返回 heap.next，不同返回 head即可
      *
      * 复杂度分析：
      * 时间复杂度：O(n)

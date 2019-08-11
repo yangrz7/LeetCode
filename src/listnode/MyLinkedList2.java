@@ -31,8 +31,8 @@ public class MyLinkedList2 {
 
     public void addAtHead(int val) {
 //        Node node = new Node(val);
-//        node.next = head;
-//        head = node;
+//        node.next = heap;
+//        heap = node;
         head = new Node(val, head);
         size ++;
     }
